@@ -1,7 +1,6 @@
 # `bit_store`
 
-Store and access bits by absolute and relative positions in generic
-bit arrays
+> Store and access bits by absolute and relative position
 
     extern crate typenum;
     use typenum::consts::*;
