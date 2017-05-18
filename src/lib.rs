@@ -220,7 +220,7 @@ impl <T,N> BitStore <T,N> where
   /// ```
 
   pub fn from_slice (slice:&[T]) -> Self {
-    BitStore::<T,N> { bits: GenericArray::from_slice(slice) }
+    BitStore::<T,N> { bits: *GenericArray::from_slice(slice) }
   }
 
 
@@ -549,7 +549,7 @@ impl <T,N> Shl <Bix> for BitStore <T,N> where
     let tshift = rhs / tcap;
     let lshift = rhs % tcap;
     let rshift = (tcap - lshift) % tcap;
-    let mut out = GenericArray::<T,N>::new();
+    let mut out = GenericArray::<T,N>::default();
 
     out[tshift] = self[0] << lshift;
     for i in (tshift + 1)..len {
@@ -619,7 +619,7 @@ impl <T,N> Shr <Bix> for BitStore <T,N> where
     let tshift = rhs / tcap;
     let rshift = rhs % tcap;
     let lshift = (tcap - rshift) % tcap;
-    let mut out = GenericArray::<T,N>::new();
+    let mut out = GenericArray::<T,N>::default();
 
     out[len-1 - tshift] = self[len-1] >> rshift;
     for i in (tshift + 1)..len {
@@ -660,7 +660,7 @@ impl <T,N> Zero for BitStore <T,N> where
 {
 
   fn zero () -> Self {
-    BitStore::<T,N> { bits: GenericArray::<T,N>::new() }
+    BitStore::<T,N> { bits: GenericArray::<T,N>::default() }
   }
 }
 
